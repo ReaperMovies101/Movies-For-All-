@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now You See Me: Now You Don't</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('https://images.alphacoders.com/139/1396139.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        #login-box, #video-container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            width: 350px;
+            color: white;
+            backdrop-filter: blur(6px);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 32px;
+            text-shadow: 0 0 10px #ffffff;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            margin-bottom: 15px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            width: 85%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #dddddd;
+        }
+
+        #error {
+            color: #ff4444;
+            margin-top: 10px;
+            height: 20px;
+        }
+
+        #video-container {
+            display: none;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="login-box">
+        <h1>Now You See Me: Now You Don't</h1>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkPassword()">Enter</button>
+        <div id="error"></div>
+    </div>
+
+    <div id="video-container">
+        <iframe 
+            src="https://drive.google.com/file/d/189tdcK0W32ca2miSjxmir08RbpBZt7q-/preview" 
+            allow="autoplay; fullscreen">
+        </iframe>
+    </div>
+
+    <script>
+        const correctPassword = "1234"; // change this to your real password
+
+        function checkPassword() {
+            const input = document.getElementById("password").value;
+            const error = document.getElementById("error");
+            const loginBox = document.getElementById("login-box");
+            const videoContainer = document.getElementById("video-container");
+
+            if (input === correctPassword) {
+                loginBox.style.display = "none";
+                videoContainer.style.display = "block";
+            } else {
+                error.textContent = "Incorrect password";
+                loginBox.style.animation = "shake 0.3s";
+                setTimeout(() => loginBox.style.animation = "", 300);
+            }
+        }
+
+        document.getElementById("password").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
